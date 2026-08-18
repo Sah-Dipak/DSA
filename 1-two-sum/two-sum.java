@@ -5,11 +5,12 @@ class Solution {
         for(int i=0; i<n; i++){
             for(int j=i+1; j<n; j++){
                 if(nums[i] + nums[j] == target){
-                    return new int[]{i,j};
+                    int[] ans = {i , j};
+                    return ans;
                 }
             }
         }
-
-        return new int[]{};
+        int[] ans = {};
+        return ans;
     }
 }
