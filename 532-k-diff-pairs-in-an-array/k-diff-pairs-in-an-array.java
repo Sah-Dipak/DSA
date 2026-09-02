@@ -1,27 +1,41 @@
 class Solution {
-    public int findPairs(int[] nums, int k) {
 
-        Arrays.sort(nums);
-        int n = nums.length;
+    static boolean binarySearch(int[] nums , int target ,int low){
+        int high = nums.length-1;
 
-        int count = 0;
-        int l = 0;
-        int r = 1;
+        while(low <= high){
+            int mid = low + (high - low) / 2;
 
-        while(r < n){
-            if(l == r || nums[r] - nums[l] < k){
-                r++;
-            }else if(nums[r] - nums[l] > k){
-                l++;
+            if(nums[mid] == target){
+                return true;
+            }else if(nums[mid] < target){
+                low = mid + 1;
             }else{
-                l++;
-                count++;
-
-                while(l < n && nums[l] == nums[l-1]) l++;
-                r = Math.max(r , l+1);
+                high = mid - 1;
             }
         }
+        return false;
+    }
 
+    public int findPairs(int[] nums, int k) {
+        int n = nums.length;
+
+        Arrays.sort(nums);
+        int count = 0;
+        for(int i=0; i<n; i++){
+
+            if(i > 0 && nums[i] == nums[i-1]){
+                continue;
+            }
+
+        
+
+        int target = k + nums[i];
+        if(binarySearch(nums , target , i+1)){
+                count++;
+        }
+
+        }
         return count;
     }
 }
